@@ -1,5 +1,8 @@
 version: '3'
 
+volumes:
+  bundle:
+
 services:
   rb:
     image: jiffy/app
@@ -9,3 +12,4 @@ services:
     stdin_open: true
     volumes:
       - ./:/app
+      - bundle:/usr/local/bundle
