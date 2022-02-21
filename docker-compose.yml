@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  rb:
+    image: jiffy/app
+    build: .
+    command: /bin/bash
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./:/app
