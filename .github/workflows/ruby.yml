@@ -23,11 +23,14 @@ jobs:
           image: ruby-image:latest
           run: rspec
 
-  # lint:
-  #   runs-on: self-hosted
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v2
-  #     # Add or replace any other lints here
-  #     - name: Lint Ruby files
-  #       run: rubocop
+  test-on-container:
+    runs-on: self-hosted
+    container:
+      image: ruby:2.6.5-slim-buster
+      volumes:
+        - bundle:/usr/local/bundle
+    steps:
+      - name: install gems
+        run: bundle install
+      - name: run tests
+        run: rspec
