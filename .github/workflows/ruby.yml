@@ -16,30 +16,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      # Add or replace dependency steps here
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@8f312efe1262fb463d906e9bf040319394c18d3e # v1.92
+      - uses: docker/build-push-action@v2
         with:
-          bundler-cache: true
-          ruby-version: '2.6.5'
-        env:
-          ImageOS: ubuntu20
-      # Add or replace test runners here
-      - name: Run tests
-        run: rspec
+          tags: ruby-image:latest
+          push: false
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: ruby-image:latest
+          run: rspec
 
-  lint:
-    runs-on: self-hosted
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@8f312efe1262fb463d906e9bf040319394c18d3e # v1.92
-        with:
-          bundler-cache: true
-          ruby-version: '2.6.5'
-        env:
-          ImageOS: ubuntu20
-      # Add or replace any other lints here
-      - name: Lint Ruby files
-        run: rubocop
+  # lint:
+  #   runs-on: self-hosted
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v2
+  #     # Add or replace any other lints here
+  #     - name: Lint Ruby files
+  #       run: rubocop
