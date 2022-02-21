@@ -11,17 +11,17 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  test:
-    runs-on: self-hosted
-    steps:
-      - uses: docker/build-push-action@v2
-        with:
-          tags: ruby-image:latest
-          push: false
-      - uses: addnab/docker-run-action@v3
-        with:
-          image: ruby-image:latest
-          run: rspec
+  # test:
+  #   runs-on: self-hosted
+  #   steps:
+  #     - uses: docker/build-push-action@v2
+  #       with:
+  #         tags: ruby-image:latest
+  #         push: false
+  #     - uses: addnab/docker-run-action@v3
+  #       with:
+  #         image: ruby-image:latest
+  #         run: rspec
 
   test-on-container:
     runs-on: self-hosted
