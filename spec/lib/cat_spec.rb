@@ -5,12 +5,12 @@ require 'cat'
 
 describe Cat do
   subject(:instance) { Cat.new(age: age, color: color) }
-  let(:age) { 1 }
+  let(:age) { 2 }
   let(:color) { 'black' }
 
   describe '#age' do
     subject { instance.age }
-    it { is_expected.to eq 1 }
+    it { is_expected.to eq 2 }
   end
 
   describe '#color' do
