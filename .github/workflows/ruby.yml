@@ -60,4 +60,4 @@ jobs:
         - bundle:/usr/local/bundle
     steps:
       - name: run tests
-        run: rspec {{ matrix.file }}
+        run: rspec ${{ matrix.file }}
