@@ -50,13 +50,13 @@ jobs:
     needs: install-container
     strategy:
       matrix:
-        test_group:
-          - cat
-          - dog
+        file:
+          - spec/lib/cat_spec.rb
+          - spec/lib/dog_spec.rb
     container:
       image: ruby:2.6.5-slim-buster
       volumes:
         - bundle:/usr/local/bundle
     steps:
       - name: run tests
-        run: rspec spec/lib/${{ matrix.test_group }}_spec.rb
+        run: rspec {{ matrix.file }}
