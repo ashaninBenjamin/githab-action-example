@@ -42,6 +42,8 @@ jobs:
       volumes:
         - bundle:/usr/local/bundle
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: install gems
         run: bundle install
 
