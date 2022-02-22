@@ -49,14 +49,11 @@ jobs:
     runs-on: self-hosted
     needs: install-container
     strategy:
+      fail-fast: false
       matrix:
         file:
           - spec/lib/cat_spec.rb
           - spec/lib/dog_spec.rb
-    container:
-      image: ruby:2.6.5-slim-buster
-      volumes:
-        - bundle:/usr/local/bundle
     steps:
       - name: run tests
         run: rspec {{ matrix.file }}
