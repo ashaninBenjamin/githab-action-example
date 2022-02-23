@@ -1,0 +1,59 @@
+# This workflow uses actions that are not certified by GitHub.  They are
+# provided by a third-party and are governed by separate terms of service,
+# privacy policy, and support documentation.
+#
+# This workflow will install a prebuilt Ruby version, install dependencies, and
+# run tests and linters.
+name: "Ruby CI. Group 2"
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  # test:
+  #   runs-on: self-hosted
+  #   steps:
+  #     - uses: docker/build-push-action@v2
+  #       with:
+  #         tags: ruby-image:latest
+  #         push: false
+  #     - uses: addnab/docker-run-action@v3
+  #       with:
+  #         image: ruby-image:latest
+  #         run: rspec
+
+  # container
+  #   services:
+  #     postgres:
+  #       image: postgres:12.5-alpine
+  #       env:
+  #         POSTGRES_USER: postgres
+  #         POSTGRES_PASSWORD: postgres
+  #         POSTGRES_DB: postgres
+  #       ports:
+  #         - 5432:5432
+  #       options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+  install-container:
+    runs-on: self-hosted
+    container:
+      image: ruby:2.6.5-slim-buster
+      volumes:
+        - bundle:/usr/local/bundle
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: install gems
+        run: bundle install
+
+  test-on-container:
+    runs-on: self-hosted
+    needs: install-container
+    container:
+      image: ruby:2.6.5-slim-buster
+      volumes:
+        - bundle:/usr/local/bundle
+    steps:
+      - name: run tests
+        run: rspec spec/lib/dog_spec.rb
