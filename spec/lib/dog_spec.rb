@@ -6,7 +6,7 @@ require 'dog'
 describe Dog do
   subject(:instance) { described_class.new(age: age, color: color) }
   let(:age) { 3 }
-  let(:color) { 'yellow1' }
+  let(:color) { 'yellow' }
 
   describe '#age' do
     subject { instance.age }
