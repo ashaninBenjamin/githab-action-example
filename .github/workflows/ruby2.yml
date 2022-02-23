@@ -36,6 +36,7 @@ jobs:
   #       options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
   install-container:
+    name: 'Install Container Dog'
     runs-on: self-hosted
     container:
       image: ruby:2.6.5-slim-buster
@@ -48,6 +49,7 @@ jobs:
         run: bundle install
 
   test-on-container:
+    name: 'Test Dog'
     runs-on: self-hosted
     needs: install-container
     container:
