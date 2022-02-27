@@ -35,8 +35,8 @@ jobs:
   #         - 5432:5432
   #       options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
-  install-container:
-    name: 'Install Container Cat'
+  test:
+    name: 'Test Cat'
     runs-on: self-hosted
     container:
       image: ruby:2.6.5-slim-buster
@@ -47,15 +47,5 @@ jobs:
         uses: actions/checkout@v2
       - name: install gems
         run: bundle install
-
-  test-on-container:
-    name: 'Test Cat'
-    runs-on: self-hosted
-    needs: install-container
-    container:
-      image: ruby:2.6.5-slim-buster
-      volumes:
-        - bundle:/usr/local/bundle
-    steps:
       - name: run tests
         run: rspec spec/lib/cat_spec.rb
