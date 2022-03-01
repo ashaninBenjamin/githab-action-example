@@ -1,0 +1,34 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: ruby-runner-deployment
+spec:
+  template:
+    spec:
+      repository: ashaninBenjamin/githab-action-example
+      volumes:
+        - name: docker-extra
+          hostPath:
+            path: /data/bundle
+            type: DirectoryOrCreate
+      dockerVolumeMounts:
+        - mountPath: /data/bundle
+          name: docker-extra
+      volumeMounts:
+        - mountPath: /data/bundle
+          name: repo
+---
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: HorizontalRunnerAutoscaler
+metadata:
+  name: ruby-runner-deployment-autoscaler
+spec:
+  scaleTargetRef:
+    name: ruby-runner-deployment
+  minReplicas: 1
+  maxReplicas: 5
+  # Your chosen scaling metrics here
+  metrics:
+  - type: TotalNumberOfQueuedAndInProgressWorkflowRuns
+    repositoryNames:
+    - ashaninBenjamin/githab-action-example
