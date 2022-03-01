@@ -3,7 +3,6 @@
 class Dog
   def initialize(age:, color:)
     @age = age
-    sleep 60
     @color = color
   end
 
