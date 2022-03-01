@@ -41,7 +41,7 @@ jobs:
     container:
       image: ruby:2.6.5-slim-buster
       volumes:
-        - /data/bundle:/usr/local/bundle
+        - bundle:/usr/local/bundle
     steps:
       - name: Checkout
         uses: actions/checkout@v2
