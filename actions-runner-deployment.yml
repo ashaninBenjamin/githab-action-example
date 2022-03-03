@@ -7,7 +7,7 @@ spec:
     spec:
       imagePullPolicy: IfNotPresent
       repository: ashaninBenjamin/githab-action-example
-      ephemeral: false
+      ephemeral: true
       volumes:
         - name: bundle
           hostPath:
