@@ -35,6 +35,14 @@ jobs:
   #         - 5432:5432
   #       options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
+
+  debug:
+    name: Debug
+    runs-on: self-hosted
+    steps:
+      - name: try docker
+        run: docker volume ls
+
   test:
     name: 'Test Dog'
     runs-on: self-hosted
@@ -45,6 +53,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - run: ls -lah /usr/local/bundle
       - name: install gems
         run: bundle install
       - name: run tests
