@@ -5,18 +5,20 @@ metadata:
 spec:
   template:
     spec:
+      imagePullPolicy: IfNotPresent
       repository: ashaninBenjamin/githab-action-example
+      ephemeral: false
       volumes:
-        - name: docker-extra
+        - name: bundle
           hostPath:
-            path: /data/bundle
+            path: /mnt/bundle
             type: DirectoryOrCreate
       dockerVolumeMounts:
-        - mountPath: /data/bundle
-          name: docker-extra
-      volumeMounts:
-        - mountPath: /data/bundle
-          name: repo
+        - mountPath: /usr/local/bundle
+          name: bundle
+      # volumeMounts:
+      #   - mountPath: /usr/local/bundle
+      #     name: bundle
 ---
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: HorizontalRunnerAutoscaler
